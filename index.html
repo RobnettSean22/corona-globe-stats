@@ -4,14 +4,15 @@
     <script src="http://www.webglearth.com/v2/api.js"></script>
     <script>
       function initialize() {
+        var bounds = [
+          [35.98245136, -112.26379395],
+          [36.13343831, -112.10998535]
+        ];
         var options = { atmosphere: true, center: [0, 0], zoom: 0 };
         var earth = new WE.map("earth_div", options);
-        earth.setView([46.8011, 8.2266], 3);
+        earth.setView([36.057944835, 112.18688965], 1);
         WE.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          minZoom: 0,
-          maxZoom: 5,
-          attribution: "NASA",
-          animate: true
+          attribution: "© OpenStreetMap contributors"
         }).addTo(earth);
       }
     </script>
