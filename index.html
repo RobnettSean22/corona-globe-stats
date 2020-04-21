@@ -4,16 +4,25 @@
     <script src="http://www.webglearth.com/v2/api.js"></script>
     <script>
       function initialize() {
-        var bounds = [
-          [35.98245136, -112.26379395],
-          [36.13343831, -112.10998535]
-        ];
         var options = { atmosphere: true, center: [0, 0], zoom: 0 };
         var earth = new WE.map("earth_div", options);
-        earth.setView([36.057944835, 112.18688965], 1);
-        WE.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "© OpenStreetMap contributors"
-        }).addTo(earth);
+        WE.tileLayer(
+          "https://api.maptiler.com/maps/hybrid/256/{z}/{x}/{y}.jpg?key=TQ21emwNuk5PDbB4DUXH",
+          {
+            minZoom: 1,
+            maxZoom: 5,
+            attribution:
+              '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+          }
+        ).addTo(earth);
+        var before = null;
+        requestAnimationFrame(function animate(now) {
+          var c = earth.getPosition();
+          var elapsed = before ? now - before : 0;
+          before = now;
+          earth.setCenter([c[0], c[1] + 0.1 * (elapsed / 30)]);
+          requestAnimationFrame(animate);
+        });
       }
     </script>
     <style>
@@ -27,11 +36,11 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background-color: #000;
-        position: absolute !important;
+        background-image: url("stars.jpg");
+        position: absolute;
       }
     </style>
-    <title>WebGL Earth API: Satellite</title>
+    <title>Corona Track</title>
   </head>
   <body onload="initialize()">
     <div id="earth_div"></div>
