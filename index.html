@@ -13,14 +13,20 @@
               '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
           }
         ).addTo(earth);
-        var before = null;
-        requestAnimationFrame(function animate(now) {
-          var c = earth.getPosition();
-          var elapsed = before ? now - before : 0;
-          before = now;
-          earth.setCenter([c[0], c[1] + 0.1 * (elapsed / 30)]);
-          requestAnimationFrame(animate);
-        });
+        // fetch("http://api.worldbank.org/v2/country/?format=json")
+        //   .then(response => {
+        //     return response.json();
+        //   })
+        //   .then(data => {
+        //     console.log(data[1]);
+        //     const loctaion = data[1].map(place => {
+        //       console.log(222, place.latitude);
+
+        //     });
+        //     return location
+        //   });
+        var marker = WE.marker([39.655687, -100.124921]).addTo(earth);
+        marker.bindPopup({ maxWidth: 150, closeButton: true }).openPopup();
       }
     </script>
     <style>
@@ -28,6 +34,7 @@
       body {
         width: 100vw;
         height: 100vh;
+
         padding: 0;
         margin: 0;
       }
