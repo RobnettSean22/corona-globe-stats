@@ -13,20 +13,21 @@
               '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
           }
         ).addTo(earth);
-        // fetch("http://api.worldbank.org/v2/country/?format=json")
-        //   .then(response => {
-        //     return response.json();
-        //   })
-        //   .then(data => {
-        //     console.log(data[1]);
-        //     const loctaion = data[1].map(place => {
-        //       console.log(222, place.latitude);
+        fetch("locations.json")
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            console.log(data);
+            const loctaion = data.map(place => {
+              var marker = WE.marker([place.latitude, place.longitude]).addTo(
+                earth
+              );
+            });
+            return location;
+          });
 
-        //     });
-        //     return location
-        //   });
-        var marker = WE.marker([39.655687, -100.124921]).addTo(earth);
-        marker.bindPopup({ maxWidth: 150, closeButton: true }).openPopup();
+        // marker.bindPopup({ maxWidth: 150, closeButton: true }).openPopup();
       }
     </script>
     <style>
